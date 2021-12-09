@@ -1,23 +1,59 @@
-interface Tank {
-    name: string
-    speed: number
+interface Developer{
+    writeCode():void
 }
 
-class T34 implements Tank {
-    name: string = 't-34';
-    speed: number = 100;
+interface Tester{
+    testCode():void
 }
 
-class Matilda implements Tank {
-    name: string = 'matilda';
-    speed: number = 30;
+interface Manager{
+    managerProgect():void
 }
 
-class Helcot implements Tank {
-    name: string = 'helcot';
-    speed: number = 38;
+
+interface Team{
+    getDeveloper():Developer
+    getTester():Tester
+    getManager():Manager
 }
 
-console.log(`Танк:${new T34().name} Скорость:${new T34().speed}`);
-console.log(`Танк:${new Matilda().name} Скорость:${new Matilda().speed}`);
-console.log(`Танк:${new Helcot().name} Скорость:${new Helcot().speed}`);
+
+
+class BankDeveloper implements Developer{
+    writeCode(): void {
+        console.log('В банковский проект нанят разработчик');
+    }
+}
+class BankTester implements Tester{
+    testCode(): void {
+        console.log('В банковском проекте тестировщик тестирует код');
+    }
+}
+class BankManager implements Manager{
+    managerProgect(): void {
+        console.log('В банковский проект нанаят менеджер');
+    }
+}
+
+
+
+class BankTeam implements Team{
+    getDeveloper(): Developer {
+        return new BankDeveloper()
+    }
+    getManager(): Manager {
+        return new BankManager()
+    }
+    getTester(): Tester {
+        return new BankTester()
+    }
+}
+
+let team:Team = new BankTeam();
+let developer:Developer = team.getDeveloper();
+let tester:Tester = team.getTester();
+let manager:Manager = team.getManager();
+
+developer.writeCode();
+tester.testCode();
+manager.managerProgect();
