@@ -20,7 +20,7 @@ class Decorator implements Developer{
     }
 }
 
-class SeniorJSDeveloper extends Decorator{
+class JSDeveloperDrink extends Decorator{
     constructor(developer:Developer){
         super(developer)
     }
@@ -32,7 +32,7 @@ class SeniorJSDeveloper extends Decorator{
     }
 }
 
-class TeamLeadJSDeveloper extends Decorator{
+class JSDeveloperSend extends Decorator{
     constructor(developer:Decorator){
         super(developer)
     }
@@ -44,5 +44,9 @@ class TeamLeadJSDeveloper extends Decorator{
     }
 }
 
-let developer1:Developer = new TeamLeadJSDeveloper(new SeniorJSDeveloper(new JSDeveloper));
+
+
+// let developer1:Developer = new SeniorJSDeveloper(new JSDeveloper)
+
+let developer1:Developer = new JSDeveloperSend(new JSDeveloperDrink(new JSDeveloper));
 console.log(developer1.makeJob());

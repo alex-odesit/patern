@@ -7,6 +7,8 @@ abstract class Program{
 
     public abstract developProgram():void
 }
+
+
 class BankSystem extends Program{
     public constructor(developer:Developer){
         super(developer)

@@ -21,6 +21,6 @@ class Adapter extends Person {
     }
 }
 let man = new Adapter();
-man.getName();
-man.getSurname();
-man.getSurname();
+man.name();
+man.surname();
+man.phone();
