@@ -1,59 +1,75 @@
-interface Developer{
-    writeCode():void
+interface Phone{
+    createPhone():void
 }
 
-interface Tester{
-    testCode():void
+interface Laptop{
+    createLaptop():void
 }
 
-interface Manager{
-    managerProgect():void
+interface Country{
+    getPhone():Phone
+    getLaptop():Laptop
 }
 
-
-interface Team{
-    getDeveloper():Developer
-    getTester():Tester
-    getManager():Manager
-}
-
-
-
-class BankDeveloper implements Developer{
-    writeCode(): void {
-        console.log('В банковский проект нанят разработчик');
-    }
-}
-class BankTester implements Tester{
-    testCode(): void {
-        console.log('В банковском проекте тестировщик тестирует код');
-    }
-}
-class BankManager implements Manager{
-    managerProgect(): void {
-        console.log('В банковский проект нанаят менеджер');
+class Xiaomy implements Phone{
+    public createPhone(): void {
+        console.log('Заказан телефон с Китая');
     }
 }
 
-
-
-class BankTeam implements Team{
-    getDeveloper(): Developer {
-        return new BankDeveloper()
-    }
-    getManager(): Manager {
-        return new BankManager()
-    }
-    getTester(): Tester {
-        return new BankTester()
+class Asus implements Laptop{
+    public createLaptop(): void {
+        console.log('Заказан ноутбук с Китая');
     }
 }
 
-let team:Team = new BankTeam();
-let developer:Developer = team.getDeveloper();
-let tester:Tester = team.getTester();
-let manager:Manager = team.getManager();
+class IPhone implements Phone{
+    public createPhone(): void {
+        console.log('Заказан телефон с США');
+    }
+}
 
-developer.writeCode();
-tester.testCode();
-manager.managerProgect();
+class MacBook implements Laptop{
+    public createLaptop(): void {
+        console.log('Заказан ноутбук с США');
+    }
+}
+
+class ChinaProducts implements Country{
+    getPhone():Phone{
+        return new Xiaomy()
+    }
+    getLaptop():Laptop{
+        return new Asus()
+    }
+}
+
+class USAProducts implements Country{
+    getPhone():Phone{
+        return new IPhone()
+    }
+    getLaptop():Laptop{
+        return new MacBook()
+    }
+}
+
+class ProductCountry{
+    public getCountry(country:string):Country{
+        switch(country){
+            case 'China':
+                return new ChinaProducts()
+            case 'USA':
+                return new USAProducts()
+        }
+    }
+}
+
+let country:ProductCountry = new ProductCountry()
+let usa:USAProducts = country.getCountry('USA')
+let china:ChinaProducts = country.getCountry('China')
+
+usa.getLaptop().createLaptop()
+usa.getPhone().createPhone()
+
+china.getLaptop().createLaptop()
+china.getPhone().createPhone()
